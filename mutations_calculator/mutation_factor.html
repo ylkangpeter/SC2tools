@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Table</title>
+
+    <style>        
+        
+        table {
+            border-collapse: collapse;
+            min-width: 400px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            cursor: pointer;
+            background-color: lightgrey; /* 设置表头背景色为浅灰色 */
+        }
+        /* 设置选中行的背景颜色 */
+        .selected {
+            background-color: lightblue;
+        }
+
+        .mutation_ico{
+            padding: 2px;
+        }
+
+        #sortableTable td{
+            padding: 0px 8px 0px 8px;
+        }
+        #sortableTable{
+            width: 45%;
+        }
+        img{
+            width: 30px;
+        }
+        #brutal1{
+            margin-top: 130px;
+        }
+        .table-container{
+/*            width: 50%;*/
+            position: fixed;
+            top: 0;
+            background-color: white;
+/*            transform: translateX(-50%);*/
+        }
+    </style>
+</head>
+<body>
+
+     <div class="container">/
+            <table id="brutal1">
+                <thead>
+                    <tr>
+                        <th>残酷+难度等级</th>
+                        <th>分数下限</th>
+                        <th>分数上限</th>
+                        <th>最少因子数</th>
+                        <th>最多因子数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                        <td>残酷 +1</td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>残酷 +2</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>残酷 +3</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>残酷 +4</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>残酷 +5</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>残酷 +6</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        <div class="table-container">
+            <table id="brutal2">
+                <thead>
+                    <tr>
+                        <th>当前选择</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="iconResult"></td>
+                    </tr>
+                    <tr>
+                        <td id="scoreResult"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <table id="sortableTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">英文名称</th>
+                <th onclick="sortTable(1)">中文翻译</th>
+                <th onclick="sortTable(2)">因子分数</th>
+                <th>图标</th>
+            </tr>
+        </thead>
+        <tbody>
+<tr><td>AggressiveDeployment</td><td>进攻部署</td><td>3</td><td><img src="img/aggressivedeployment.png" /></td></tr>
+<tr><td>AlienIncubation</td><td>异形孵化</td><td>2</td><td><img src="img/alienincubation.png" /></td></tr>
+<tr><td>Avenger</td><td>复仇者</td><td>5</td><td><img src="img/avenger.png" /></td></tr>
+<tr><td>Barrier</td><td>屏障</td><td>2</td><td><img src="img/barrier.png" /></td></tr>
+<tr><td>BlackDeath</td><td>黑死病</td><td>7</td><td><img src="img/blackdeath.png" /></td></tr>
+<tr><td>Blizzard</td><td>暴风雪</td><td>4</td><td><img src="img/blizzard.png" /></td></tr>
+<tr><td>BoomBots</td><td>爆破机器人</td><td>10</td><td><img src="img/boombots.png" /></td></tr>
+<tr><td>ConcussiveAttacks</td><td>震荡攻击</td><td>1</td><td><img src="img/concussiveattacks.png" /></td></tr>
+<tr><td>Darkness</td><td>暗无天日</td><td>2</td><td><img src="img/darkness.png" /></td></tr>
+<tr><td>Diffusion</td><td>散射</td><td>3</td><td><img src="img/diffusion.png" /></td></tr>
+<tr><td>DoubleEdged</td><td>双重压力</td><td>3</td><td><img src="img/doubleedged.png" /></td></tr>
+<tr><td>EminentDomain</td><td>强行征用</td><td>1</td><td><img src="img/eminentdomain.png" /></td></tr>
+<tr><td>EvasiveManeuvers</td><td>闪避机动</td><td>1</td><td><img src="img/evasivemaneuvers.png" /></td></tr>
+<tr><td>FatalAttraction</td><td>致命吸引</td><td>3</td><td><img src="img/fatalattraction.png" /></td></tr>
+<tr><td>Fear</td><td>恐惧</td><td>3</td><td><img src="img/fear.png" /></td></tr>
+<tr><td>GoingNuclear</td><td>核弹打击</td><td>3</td><td><img src="img/goingnuclear.png" /></td></tr>
+<tr><td>HardenedWill</td><td>坚定意志</td><td>2</td><td><img src="img/hardenedwill.png" /></td></tr>
+<tr><td>HeroesfromtheStorm</td><td>风暴英雄</td><td>10</td><td><img src="img/heroesfromthestorm.png" /></td></tr>
+<tr><td>Inspiration</td><td>鼓舞</td><td>2</td><td><img src="img/inspiration.png" /></td></tr>
+<tr><td>JustDie</td><td>给我死吧</td><td>7</td><td><img src="img/justdie.png" /></td></tr>
+<tr><td>KillBots</td><td>杀戮机器人</td><td>6</td><td><img src="img/killbots.png" /></td></tr>
+<tr><td>LaserDrill</td><td>激光钻机</td><td>2</td><td><img src="img/laserdrill.png" /></td></tr>
+<tr><td>LavaBurst</td><td>岩浆喷发</td><td>3</td><td><img src="img/lavaburst.png" /></td></tr>
+<tr><td>LifeLeech</td><td>生命吸取</td><td>1</td><td><img src="img/lifeleech.png" /></td></tr>
+<tr><td>LongRange</td><td>远视</td><td>2</td><td><img src="img/longrange.png" /></td></tr>
+<tr><td>Mag-nificent</td><td>麦格天雷</td><td>4</td><td><img src="img/mag-nificent.png" /></td></tr>
+<tr><td>MicroTransactions</td><td>拿钱说话</td><td>5</td><td><img src="img/microtransactions.png" /></td></tr>
+<tr><td>MineralShields</td><td>晶矿护盾</td><td>2</td><td> <img src="img/mineralshields.png" /> </td></tr>
+<tr><td>Minesweeper</td><td>扫雷</td><td>6</td><td> <img src="img/minesweeper.png" /> </td></tr>
+<tr><td>MissileCommand</td><td>飞弹大战</td><td>3</td><td> <img src="img/missilecommand.png" /> </td></tr>
+<tr><td>MomentofSilence</td><td>默哀</td><td>2</td><td> <img src="img/momentofsilence.png" /> </td></tr>
+<tr><td>MutuallyAssuredDestruction</td><td>相互摧毁</td><td>5</td><td> <img src="img/mutuallyassureddestruction.png" /> </td></tr>
+<tr><td>OrbitalStrike</td><td>轨道打击</td><td>1</td><td><img src="img/orbitalstrike.png" /></td></tr>
+<tr><td>Outbreak</td><td>丧尸大战</td><td>3</td><td> <img src="img/outbreak.png" /> </td></tr>
+<tr><td>PhotonOverload</td><td>光子超载</td><td>1</td><td> <img src="img/photonoverload.png" /> </td></tr>
+<tr><td>Polarity</td><td>极性</td><td>7</td><td><img src="img/polarity.png" /></td></tr>
+<tr><td>PowerOverwhelming</td><td>灵能</td><td>5</td><td> <img src="img/poweroverwhelming.png" /> </td></tr>
+<tr><td>Propagators</td><td>同化体</td><td>8</td><td> <img src="img/propagators.png" /></td></tr>
+<tr><td>PurifierBeam</td><td>净化光束</td><td>2</td><td> <img src="img/purifierbeam.png" /> </td></tr>
+<tr><td>ScorchedEarth</td><td>焦土</td><td>2</td><td> <img src="img/scorchedearth.png" /> </td></tr>
+<tr><td>SelfDestruction</td><td>自毁</td><td>3</td><td> <img src="img/selfdestruction.png" /> </td></tr>
+<tr><td>Shortsighted</td><td>短视</td><td>1</td><td><img src="img/shortsighted.png" /></td></tr>
+<tr><td>SlimPickings</td><td>小捞油水</td><td>5</td><td> <img src="img/slimpickings.png" /> </td></tr>
+<tr><td>SpeedFreaks</td><td>速度狂魔</td><td>2</td><td><img src="img/speedfreaks.png" /></td></tr>
+<tr><td>TemporalField</td><td>时空力场</td><td>1</td><td><img src="img/temporalfield.png" /></td></tr>
+<tr><td>TimeWarp</td><td>时空扭曲</td><td>1</td><td> <img src="img/timewarp.png" /> </td></tr>
+<tr><td>Transmutation</td><td>力量蜕变</td><td>7</td><td><img src="img/transmutation.png" /></td></tr>
+<tr><td>Twister</td><td>龙卷风</td><td>2</td><td> <img src="img/twister.png" /></td></tr>
+<tr><td>VoidReanimators</td><td>虚空复活者</td><td>5</td><td><img src="img/voidreanimators.png" /></td></tr>
+<tr><td>VoidRifts</td><td>虚空裂隙</td><td>10</td><td> <img src="img/voidrifts.png" /> </td></tr>
+<tr><td>WalkingInfested</td><td>步行感染者</td><td>2</td><td><img src="img/walkinginfested.png" /></td></tr>
+<tr><td>WeMoveUnseen</td><td>来去无踪</td><td>3</td><td> <img src="img/wemoveunseen.png" /> </td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        window.onload = function() {
+            var iconResult = document.getElementById('iconResult');
+            var scoreResult = document.getElementById('scoreResult');
+            var tableContainer = document.querySelector('div');
+
+            tableContainer.addEventListener('scroll', function() {
+                var scrollTop = tableContainer.scrollTop;
+                iconResult.style.top = scrollTop + 'px';
+                scoreResult.style.top = scrollTop + 'px';
+            });
+        };
+
+// 定义排序方式的全局变量
+var sortDirections = [1, 1, 1]; // 初始值为1，表示升序
+
+function sortTable(columnIndex) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("sortableTable");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+            var xValue = x.innerHTML;
+            var yValue = y.innerHTML;
+            if (sortDirections[columnIndex] == 1) {
+                if (xValue.toLowerCase() > yValue.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else {
+                if (xValue.toLowerCase() < yValue.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+    // 切换排序方向
+    sortDirections[columnIndex] *= -1;
+    // 更新箭头图标
+    updateArrowIcons(columnIndex);
+}
+
+function updateArrowIcons(columnIndex) {
+    var table = document.getElementById("sortableTable");
+    var ths = table.getElementsByTagName("th");
+
+    for (var i = 0; i < ths.length; i++) {
+        ths[i].innerHTML = ths[i].textContent.replace(' ▼', '').replace(' ▲', '');
+    }
+
+    var arrowIcon = sortDirections[columnIndex] == 1 ? ' ▼' : ' ▲';
+    ths[columnIndex].innerHTML += arrowIcon;
+}
+
+
+        var selectedRows = []; // 存储选中行的数据
+
+        var table = document.getElementById('sortableTable');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].addEventListener('click', function() {
+                toggleRowSelection(this);
+            });
+        }
+
+        function toggleRowSelection(row) {
+            if (row.classList.contains('selected')) {
+                row.classList.remove('selected');
+                removeSelectedRowData(row);
+            } else {
+                row.classList.add('selected');
+                addSelectedRowData(row);
+            }
+        }
+
+
+        function addSelectedRowData(row) {
+            var rowData = {
+                'name': row.cells[1].textContent,
+                'score': row.cells[2].textContent,
+                'icon': row.cells[3].children[0].src
+            };
+            selectedRows.push(rowData);
+            printResult();
+        }
+
+        function removeSelectedRowData(row) {
+            var rowData = {
+                'name': row.cells[1].textContent,
+                'score': row.cells[2].textContent,
+                'icon': row.cells[3].children[0].src
+            
+            };
+            var index = selectedRows.findIndex(function(item) {
+                return JSON.stringify(item) === JSON.stringify(rowData);
+            });
+            if (index !== -1) {
+                selectedRows.splice(index, 1);
+            }
+            printResult();
+        }
+
+        function printResult() {
+            var result = document.getElementById('result');
+            var imgs = "";
+            var scores = 0;
+            for (var i = 0; i < selectedRows.length; i++) {
+               imgs +="<img class='mutation_ico' src='" + selectedRows[i]["icon"] +"'/>"
+               scores+=parseInt(selectedRows[i]["score"])
+            }
+            console.log(imgs)
+            console.log(scores)
+
+            var iconResult = document.getElementById('iconResult');
+            iconResult.innerHTML=imgs;
+            var scoreResult = document.getElementById('scoreResult');
+            scoreResult.innerHTML=scores;
+        }
+
+    </script>
+</body>
+</html>

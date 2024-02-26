@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>合作指挥官</title>
+	<style type="text/css">
+		body{
+			font-size: 30px;
+		}
+
+		button {
+		  background-color: #4CAF50; /* Green */
+		  border: none;
+		  color: white;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		  border-radius: 10px;
+		}
+		/* Add responsiveness to images */
+		img {
+		  max-width: 400px;
+		  height: auto;
+		  width: 40%;
+		}
+		div{
+			text-align: center;
+		}
+		a{
+			font-size: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div ><button onclick="printRandomElements()">我要重新集结我的部队！</button></div>
+	<div id="comm"></div>	<div id="lk"></div>
+	<div style="font-size:5px;color:gray;font-style:italic">credit to 灰太狼</div>
+		<script>
+		urls=[]
+
+		urls["alarak"] = "battlenet:://starcraft/map/3/148735"
+		urls["nova"] = "battlenet:://starcraft/map/3/148704"
+		urls["abathur"] = "battlenet:://starcraft/map/3/148716"
+		urls["raynor"] = "battlenet:://starcraft/map/3/148741"
+		urls["kerrigan"] = "battlenet:://starcraft/map/3/148712"
+		urls["karax"] = "battlenet:://starcraft/map/3/148733"
+		urls["swann"] = "battlenet:://starcraft/map/3/148702"
+		urls["vorazun"] = "battlenet:://starcraft/map/3/148729"
+		urls["zagara"] = "battlenet:://starcraft/map/3/148714"
+		urls["artanis"] = "battlenet:://starcraft/map/3/148726"
+		urls["stukov"] = "battlenet:://starcraft/map/3/148720"
+		urls["fenix"] = "battlenet:://starcraft/map/3/148737"
+		urls["dehaka"] = "battlenet:://starcraft/map/3/148722"
+		urls["hanandhorner"] = "battlenet:://starcraft/map/3/148706"
+		urls["tychus"] = "battlenet:://starcraft/map/3/148708"
+		urls["zeratul"] = "battlenet:://starcraft/map/3/148739"
+		urls["stetmann"] = "battlenet:://starcraft/map/3/148724"
+		urls["mengsk"] = "battlenet:://starcraft/map/3/148710"
+
+		comm = ["abathur_p0.png","abathur_p1.png","abathur_p2.png","abathur_p3.png","alarak_p0.png","alarak_p1.png","alarak_p2.png","alarak_p3.png","artanis_p0.png","artanis_p1.png","artanis_p2.png","artanis_p3.png","dehaka_p0.png","dehaka_p1.png","dehaka_p2.png","dehaka_p3.png","fenix_p0.png","fenix_p1.png","fenix_p2.png","fenix_p3.png","hanandhorner_p0.png","hanandhorner_p1.png","hanandhorner_p2.png","hanandhorner_p3.png","karax_p0.png","karax_p1.png","karax_p2.png","karax_p3.png","kerrigan_p0.png","kerrigan_p1.png","kerrigan_p2.png","kerrigan_p3.png","mengsk_p0.png","mengsk_p1.png","mengsk_p2.png","mengsk_p3.png","nova_p0.png","nova_p1.png","nova_p2.png","nova_p3.png","raynor_p0.png","raynor_p1.png","raynor_p2.png","raynor_p3.png","stetmann_p0.png","stetmann_p1.png","stetmann_p2.png","stetmann_p3.png","stukov_p0.png","stukov_p1.png","stukov_p2.png","stukov_p3.png","swann_p0.png","swann_p1.png","swann_p2.png","swann_p3.png","tychus_p0.png","tychus_p1.png","tychus_p2.png","tychus_p3.png","vorazun_p0.png","vorazun_p1.png","vorazun_p2.png","vorazun_p3.png","zagara_p0.png","zagara_p1.png","zagara_p2.png","zagara_p3.png","zeratul_p0.png","zeratul_p1.png","zeratul_p2.png","zeratul_p3.png"]
+
+
+		function printRandomElements() {
+			var commander = comm[Math.floor(Math.random() * comm.length)];
+			var url=urls[commander.split("_")[0]]
+			document.getElementById("comm").innerHTML="<img src='./img/Prestige_icons/"+commander+"''></img>"
+			
+			document.getElementById("lk").innerHTML="<a href='"+url+"''>"+url+"</a>"
+		}
+	</script>
+</body>
+</html>
